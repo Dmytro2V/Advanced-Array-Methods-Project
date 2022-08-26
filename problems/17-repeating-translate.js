@@ -1,3 +1,4 @@
+
 /*
 Write a function `repeatingTranslate` that accepts a sentence as an argument.
 The function should translate the sentence according to the following rules:
@@ -30,11 +31,24 @@ console.log(repeatingTranslate("her family flew to France"));   // "herer family
 
 let repeatingTranslate = function(sentence) {
     // Your code here
+    return sentence.split(' ').map(translateWord).join(' ');
 };
 
 
 let translateWord = function(word) {
     // Your code here
+    let vowels = 'AEIOUaeiou';
+    let lastLetter = word[word.length - 1];
+    if (word.length < 3) return word;
+    else if (vowels.includes(lastLetter)) return word + word;
+    else {        
+        for (let i = word.length - 1; i >= 0; i--) {
+            letter = word[i];
+            if (vowels.includes(letter)) return word + word.slice(i);
+        }
+        return word;
+    }
+
 };
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS  LINE*****************/
@@ -43,4 +57,4 @@ try {
     module.exports = repeatingTranslate;
 } catch (e) {
     module.exports = null;
-}
+}
